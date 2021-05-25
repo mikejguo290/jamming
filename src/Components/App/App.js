@@ -56,6 +56,7 @@ export class App extends React.Component {
     };
 
     addTrack(track){
+        /* add track from search result to playlist. */
         // if track.id isn't already included in playlistTracks. add it to playlistTracks. set state
         const playlistTracks = this.state.playlistTracks;
         if (playlistTracks.find(savedTrack => savedTrack.id===track.id)){
