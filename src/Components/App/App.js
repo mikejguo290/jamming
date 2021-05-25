@@ -11,16 +11,19 @@ export class App extends React.Component {
         this.state = { 
             searchResults: [ 
                 { 
+                    id: 1,
                     name:'Fix You', 
                     artist : 'Coldplay', 
                     album: 'XYZ' 
                 },
-                { 
+                {   
+                    id: 2,
                     name:'Blinding Lights', 
                     artist: 'The Weeknd', 
                     album:'Blinding Lights'
                 },
-                {
+                {   
+                    id: 3,
                     name:'Hang with me',
                     artist:'Robyn',
                     album:'Body Talk'
@@ -28,17 +31,20 @@ export class App extends React.Component {
             ],
             playlistName: 'Relaxing',
             playlistTracks: [ 
-                { 
+                {   
+                    id: 4,
                     name:'Physical', 
                     artist : 'Dua Lipa', 
                     album: 'Future Nostalgia' 
                 },
                 { 
+                    id: 5,
                     name:'Starboy', 
                     artist: 'The Weeknd', 
                     album:'Starboy'
                 },
-                {
+                {   
+                    id: 6,
                     name:'Take on Me',
                     artist:'a-ha',
                     album:'Hunting High and Low'
