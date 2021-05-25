@@ -52,7 +52,21 @@ export class App extends React.Component {
             ]
 
         };
+        this.addTrack=this.addTrack.bind(this); // bind eventHandler method to this.
     };
+
+    addTrack(track){
+        // if track.id isn't already included in playlistTracks. add it to playlistTracks. set state
+        const playlistTracks = this.state.playlistTracks;
+        if (playlistTracks.find(savedTrack => savedTrack.id===track.id)){
+            return; // break out of the method if it finds a matching id
+        }
+        
+        // go on with the method if nothing prior returned.
+        const tracks = playlistTracks.concat(track);
+        this.setState({playlistTracks: tracks});
+        
+    }
 
     render (){
         return (
@@ -61,7 +75,7 @@ export class App extends React.Component {
                 <div className="App">
                     <SearchBar />
                     <div className="App-playlist">
-                    <SearchResults searchResults={this.state.searchResults}/>
+                    <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
                     <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
                     </div>
                 </div>
