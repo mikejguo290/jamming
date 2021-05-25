@@ -26,8 +26,8 @@ export class App extends React.Component {
                     album:'Body Talk'
                 }
             ],
-            PlaylistName: 'Relaxing',
-            PlaylistTracks: [ 
+            playlistName: 'Relaxing',
+            playlistTracks: [ 
                 { 
                     name:'Physical', 
                     artist : 'Dua Lipa', 
@@ -56,7 +56,7 @@ export class App extends React.Component {
                     <SearchBar />
                     <div className="App-playlist">
                     <SearchResults searchResults={this.state.searchResults}/>
-                    <Playlist />
+                    <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} />
                     </div>
                 </div>
             </div>
