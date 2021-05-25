@@ -3,17 +3,14 @@ import './TrackList.css'
 import {Track} from '../Track/Track'
 
 export class TrackList extends React.Component {
+
     render(){
+        let tracks = this.props.tracks;
+        tracks = tracks.map( track => <Track key={track.id} name={track.name} artist={track.artist} album={track.artist} /> )
+
         return (
             <div className="TrackList">
-                <Track />
-                <!-- You will add a map method that renders a set of Track components  -->
-                <h2>Stand in track values</h2>
-                <ol>
-                    <li>In the End</li>
-                    <li>Faint</li>
-                    <li>New Divide</li>
-                </ol>
+                {tracks}
             </div>
         )
     }
