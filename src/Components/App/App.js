@@ -8,23 +8,44 @@ export class App extends React.Component {
 
     constructor(props){
         super(props);
-        this.state = { searchResults: [ 
-            { 
-                name:'Fix You', 
-                artist : 'Coldplay', 
-                album: 'XYZ' 
-            },
-            { 
-                name:'Blinding Lights', 
-                artist: 'The Weeknd', 
-                album:'Blinding Lights'
-            },
-            {
-                name:'Hang with me',
-                artist:'Robyn',
-                album:'Body Talk'
-            }
-        ]};
+        this.state = { 
+            searchResults: [ 
+                { 
+                    name:'Fix You', 
+                    artist : 'Coldplay', 
+                    album: 'XYZ' 
+                },
+                { 
+                    name:'Blinding Lights', 
+                    artist: 'The Weeknd', 
+                    album:'Blinding Lights'
+                },
+                {
+                    name:'Hang with me',
+                    artist:'Robyn',
+                    album:'Body Talk'
+                }
+            ],
+            PlaylistName: 'Relaxing',
+            PlaylistTracks: [ 
+                { 
+                    name:'Physical', 
+                    artist : 'Dua Lipa', 
+                    album: 'Future Nostalgia' 
+                },
+                { 
+                    name:'Starboy', 
+                    artist: 'The Weeknd', 
+                    album:'Starboy'
+                },
+                {
+                    name:'Take on Me',
+                    artist:'a-ha',
+                    album:'Hunting High and Low'
+                }
+            ]
+
+        };
     };
 
     render (){
