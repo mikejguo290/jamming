@@ -1,4 +1,8 @@
 import React from 'react';
+import {SearchBar} from '../SearchBar/SearchBar';
+import {SearchResults} from '../SearchResults/SearchResults';
+import {Playlist} from '../Playlist/Playlist';
+import './App.css';
 
 export class App extends React.Component {
 
