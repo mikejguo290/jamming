@@ -53,6 +53,7 @@ export class App extends React.Component {
 
         };
         this.addTrack=this.addTrack.bind(this); // bind eventHandler method to this.
+        this.removeTrack=this.removeTrack.bind(this);
     };
 
     addTrack(track){
@@ -67,6 +68,17 @@ export class App extends React.Component {
         const tracks = playlistTracks.concat(track);
         this.setState({playlistTracks: tracks});
         
+    }
+    removeTrack(track){
+        /* remove track from playlist */
+        const playlistTracks=this.state.playlistTracks;
+        // if data passed in through callbacks is the same as the representation of tracks stored in state. 
+        if(playlistTracks.find(savedTrack => savedTrack.id===track.id)){
+            // if track's id matches id of the tracks in playlist. 
+            const trackIndex = playlistTracks.findIndex(savedTrack => savedTrack.id===track.id);
+            playlistTracks.splice(trackIndex,1); // remove just the one element at trackIndex.
+            this.setState({playlistTracks: playlistTracks})
+        }
     }
 
     render (){
