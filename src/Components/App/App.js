@@ -56,7 +56,14 @@ export class App extends React.Component {
         this.removeTrack=this.removeTrack.bind(this);
         this.updatePlaylistName=this.updatePlaylistName.bind(this);
         this.savePlaylist=this.savePlaylist.bind(this);
+        this.search=this.search.bind(this);
     };
+
+    search(searchTerm){
+        /* accept a search term and then send search parameter to spotify API and updates searchResults with the user's search results. */
+        // for now, all it has to do is to accept a searchTerm and then log it to the console.
+        console.log(searchTerm);
+    }
 
     savePlaylist(){
         /* get a list of track uris from playlistTracks.*/
@@ -103,13 +110,13 @@ export class App extends React.Component {
             <div>
                 <h1>Ja<span className="highlight">mmm</span>ing</h1>
                 <div className="App">
-                    <SearchBar />
+                    <SearchBar onSearch={this.search} />
                     <div className="App-playlist">
                     <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
                     <Playlist 
                         onNameChange={this.updatePlaylistName} 
                         onRemove={this.removeTrack} 
-                        onSave={this.savePlaylist} 
+                        onSave={this.savePlaylist}
                         playlistName={this.state.playlistName} 
                         playlistTracks={this.state.playlistTracks}
                     />
