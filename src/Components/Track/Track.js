@@ -9,17 +9,18 @@ export class Track extends React.Component{
     }
 
     renderAction(){
+        /* rendering method which will be called in render() to create buttons based on isRemoval values. */
         // displays a button with - as its content if isRemoval is true and + if isRemoval is false
-        // actually doesn't display a button as button is already specified in the render method!
         let isRemoval=this.props.isRemoval;
         let action; // = isRemoval? '-' : '+';
         if (isRemoval===true){
             action ='-'
+            return (<button className="Track-action" onClick={this.removeTrack}>{action}</button>) 
         }else if (isRemoval===false){
             // isRemoval was undefined and app rendered + buttons. which is undesirable.
             action ='+'
+            return (<button className="Track-action" onClick={this.addTrack}>{action}</button>) 
         }
-        return action;
     }
     
     addTrack(){
@@ -34,14 +35,13 @@ export class Track extends React.Component{
     }
 
     render(){
-        const isRemoval = this.props.isRemoval;
         return (
             <div className="Track">
                 <div className="Track-information">
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist} | {this.props.track.album}</p>
                     </div>
-                <button className="Track-action" onClick={isRemoval? this.removeTrack: this.addTrack}>{this.renderAction()}</button>
+                {this.renderAction()}
             </div>
         )
     }
