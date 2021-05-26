@@ -54,6 +54,7 @@ export class App extends React.Component {
         };
         this.addTrack=this.addTrack.bind(this); // bind eventHandler method to this.
         this.removeTrack=this.removeTrack.bind(this);
+        this.updatePlaylistName=this.updatePlaylistName.bind(this);
     };
 
     addTrack(track){
@@ -81,6 +82,14 @@ export class App extends React.Component {
         }
     }
 
+    updatePlaylistName(name){
+        /* update the name of the playlist , pass name arg to setState()*/
+        const playlistName=this.state.playlistName;
+        if(name!==playlistName){
+            this.setState({playlistName: name});
+        }
+    }
+
     render (){
         return (
             <div>
@@ -89,7 +98,7 @@ export class App extends React.Component {
                     <SearchBar />
                     <div className="App-playlist">
                     <SearchResults searchResults={this.state.searchResults} onAdd={this.addTrack} />
-                    <Playlist playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack}/>
+                    <Playlist onNameChange={this.updatePlaylistName} playlistName={this.state.playlistName} playlistTracks={this.state.playlistTracks} onRemove={this.removeTrack}/>
                     </div>
                 </div>
             </div>
