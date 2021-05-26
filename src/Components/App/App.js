@@ -29,7 +29,7 @@ export class App extends React.Component {
                     album:'Body Talk'
                 }
             ],
-            playlistName: 'Relaxing',
+            playlistName: 'New Playlist',
             playlistTracks: [ 
                 {   
                     id: 4,
