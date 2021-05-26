@@ -5,6 +5,7 @@ export class Track extends React.Component{
     constructor(props){
         super(props);
         this.addTrack=this.addTrack.bind(this);
+        this.removeTrack=this.removeTrack.bind(this);
     }
 
     renderAction(){
@@ -22,18 +23,25 @@ export class Track extends React.Component{
     }
     
     addTrack(){
+        // adds track to playlist
         // marries event handler and data both passed in via props!  
         this.props.onAdd(this.props.track); // tracks passed in as prop from TrackList! separation of data and representation. won't come together until made explicit.
     }
 
+    removeTrack(){
+        // removes track from playlist
+        this.props.onRemove(this.props.track); // calling callback removeTrack which expects a track object. 
+    }
+
     render(){
+        const isRemoval = this.props.isRemoval;
         return (
             <div className="Track">
                 <div className="Track-information">
                     <h3>{this.props.track.name}</h3>
                     <p>{this.props.track.artist} | {this.props.track.album}</p>
                     </div>
-                <button className="Track-action" onClick={this.addTrack}>{this.renderAction()}</button>
+                <button className="Track-action" onClick={isRemoval? this.removeTrack: this.addTrack}>{this.renderAction()}</button>
             </div>
         )
     }
