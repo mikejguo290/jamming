@@ -2,6 +2,7 @@ import React from 'react';
 import {SearchBar} from '../SearchBar/SearchBar';
 import {SearchResults} from '../SearchResults/SearchResults';
 import {Playlist} from '../Playlist/Playlist';
+import {Spotify} from '../../util/Spotify';
 import './App.css';
 
 export class App extends React.Component {
@@ -61,8 +62,11 @@ export class App extends React.Component {
 
     search(searchTerm){
         /* accept a search term and then send search parameter to spotify API and updates searchResults with the user's search results. */
-        // for now, all it has to do is to accept a searchTerm and then log it to the console.
+     
         console.log(searchTerm);
+        // use imported search function from spotify.
+        const searchResults=Spotify.search(searchTerm);
+        this.setState({searchResults: searchResults});
     }
 
     savePlaylist(){
