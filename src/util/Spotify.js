@@ -68,19 +68,21 @@ const Spotify = {
             return;
         }
         //1. Get userId from access_token
-        // initialise some variables
-        this.getAccessToken(); // this should modify the global accessToken global variable. 
-        const userAccessToken = accessToken;
-        const headers = {Authorization: `Bearer ${userAccessToken}`}
-        let userId;
+
         //start by getting the current user's ID
         let url = 'https://api.spotify.com/v1/me';
+        // initialise some variables
+        this.getAccessToken(); // this should modify the global accessToken global variable. 
+        const userAccessToken = accessToken; 
+        let headers = {Authorization: `Bearer ${userAccessToken}`}
+        let userID;
+       
         try {
             const response = await fetch(url, {headers: headers});
             if(response.ok){
                 const jsonResponse = await response.json();
                 const profile = jsonResponse.parse();
-                userId=profile.id;
+                userID=profile.id;
             }else{
                 throw new Error('Request has failed!')
             }
@@ -88,7 +90,28 @@ const Spotify = {
         }catch(error){
             console.log(error);
         }
-        //2. POST request to create playlist API to add a playlist 
+
+        //2. POST request to create playlist API to add a playlist to user account and return the playlist ID
+        url = `https://api.spotify.com/v1/users/${userID}/playlists`
+        headers={
+            Authorization: `Bearer ${userAccessToken}`,
+            'Content-Type': 'application/json',
+        }
+        let data={name: playlistName}; // add new playlist to user id 
+
+        try{
+            const response = await fetch(url, {method:'POST', headers: headers, body: JSON.stringify(data)});
+            if(response.ok){
+                const jsonResponse = await response.json();
+                const newPlaylist = jsonResponse.parse();
+                const playlistID = newPlaylist.id;
+                console.log(`playlist ID is ${playlistID}`); // debug 
+            }
+            throw new Error('Request has failed!')
+        }catch(error){
+            console.log(error);
+        }
+
     },
 
     async search(searchTerm){
