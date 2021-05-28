@@ -108,8 +108,9 @@ const Spotify = {
                 playlistID = newPlaylist.id;
                 console.log(`playlist ID is ${playlistID}`); // debug 
                 
+            }else{
+                throw new Error('Request has failed!');
             }
-            throw new Error('Request has failed!')
         }catch(error){
             console.log(error);
         }
@@ -130,8 +131,10 @@ const Spotify = {
                 const objResponse = jsonResponse.pars();
                 const snapshotID=objResponse['snapshot_id'];
 
+            }else{
+                throw new Error('Request has failed!');
             }
-            throw new Error('Request has failed!')
+            
         }catch(error){
             console.log(error);
         }
