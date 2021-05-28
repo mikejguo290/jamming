@@ -54,6 +54,43 @@ const Spotify = {
         }
     },
 
+    async savePlaylist(playlistName, trackURIs){
+        /*
+        save playlist to user's spotify account and save tracks to the new play lists with post request.
+        1.get userID from accessToken.
+        2.use userID to make post requeststs to playlist API to create a playlist
+        3.assignt track uri to new playlist
+        */
+
+        // first check if these arguments have values saved to them. if not, return to terminate immediately
+        // i.e. no play list name or no tracks saved to play list. 
+        if(!(playlistName && trackURIs)){
+            return;
+        }
+        //1. Get userId from access_token
+        // initialise some variables
+        this.getAccessToken(); // this should modify the global accessToken global variable. 
+        const userAccessToken = accessToken;
+        const headers = {Authorization: `Bearer ${userAccessToken}`}
+        let userId;
+        //start by getting the current user's ID
+        let url = 'https://api.spotify.com/v1/me';
+        try {
+            const response = await fetch(url, {headers: headers});
+            if(response.ok){
+                const jsonResponse = await response.json();
+                const profile = jsonResponse.parse();
+                userId=profile.id;
+            }else{
+                throw new Error('Request has failed!')
+            }
+            
+        }catch(error){
+            console.log(error);
+        }
+        //2. POST request to create playlist API to add a playlist 
+    },
+
     async search(searchTerm){
         /*
         search to take in a search term from user. it will eventually return a response that resolves to the list of tracks from the search
