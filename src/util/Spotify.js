@@ -98,14 +98,38 @@ const Spotify = {
             'Content-Type': 'application/json',
         }
         let data={name: playlistName}; // add new playlist to user id 
+        let playlistID; // to get data out of a try catch block, either modify a global scoped variable or return something. 
 
         try{
             const response = await fetch(url, {method:'POST', headers: headers, body: JSON.stringify(data)});
             if(response.ok){
                 const jsonResponse = await response.json();
                 const newPlaylist = jsonResponse.parse();
-                const playlistID = newPlaylist.id;
+                playlistID = newPlaylist.id;
                 console.log(`playlist ID is ${playlistID}`); // debug 
+                
+            }
+            throw new Error('Request has failed!')
+        }catch(error){
+            console.log(error);
+        }
+        //3. use the playlist ID and add the tracks associted with trackURIs into the playlist
+        // CodeCademy hint is to set url = /v1/users/{user_id}/playlists/{playlist_id}/tracks
+        url = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
+        headers={
+            Authorization: `Bearer ${userAccessToken}`,
+            'Content-Type': 'application/json'
+        }
+
+        data={uris:trackURIs}
+        try{
+            const response = await fetch( url , {method:'POST', headers: headers, body: JSON.stringify(data)});
+            if (response.ok){
+                //
+                const jsonResponse = await response.json();
+                const objResponse = jsonResponse.pars();
+                const snapshotID=objResponse['snapshot_id'];
+
             }
             throw new Error('Request has failed!')
         }catch(error){
