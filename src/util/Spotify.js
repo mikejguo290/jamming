@@ -126,7 +126,10 @@ const Spotify = {
         try{
             const response = await fetch( url , {method:'POST', headers: headers, body: JSON.stringify(data)});
             if (response.ok){
-                //
+                /*
+                what to do with the response? not sure if CodeCademy typo or the spotify API has changed but the follwoing is not possible according to documentations.
+                Convert the response to JSON and save the response id parameter to a variable called playlistID. 
+                */
                 const jsonResponse = await response.json();
                 const objResponse = jsonResponse.pars();
                 const snapshotID=objResponse['snapshot_id'];
