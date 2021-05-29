@@ -31,26 +31,7 @@ export class App extends React.Component {
                 }
             ],
             playlistName: 'New Playlist',
-            playlistTracks: [ 
-                {   
-                    id: 4,
-                    name:'Physical', 
-                    artist : 'Dua Lipa', 
-                    album: 'Future Nostalgia' 
-                },
-                { 
-                    id: 5,
-                    name:'Starboy', 
-                    artist: 'The Weeknd', 
-                    album:'Starboy'
-                },
-                {   
-                    id: 6,
-                    name:'Take on Me',
-                    artist:'a-ha',
-                    album:'Hunting High and Low'
-                }
-            ]
+            playlistTracks: [ ]
 
         };
         this.addTrack=this.addTrack.bind(this); // bind eventHandler method to this.
@@ -68,11 +49,15 @@ export class App extends React.Component {
         this.setState({searchResults: searchResults});
     }
 
-    savePlaylist(){
+    async savePlaylist(){
         /* get a list of track uris from playlistTracks.*/
-        const playlistTracks=this.state.playlistTracks
+        const playlistTracks=this.state.playlistTracks;
+        console.log(this.state.playlistTracks);
+
         const trackURIs = playlistTracks.map(track => track.uri);
-        Spotify.savePlaylist(this.playlistName, trackURIs);
+        console.log(trackURIs)
+       
+        await Spotify.savePlaylist(this.state.playlistName, trackURIs);
         // after calling savePlaylist, reset the playlist name and playlist tracks saved in state. 
         this.setState({playlistName: 'New Playlist'});
         this.setState({playlistTracks: []});

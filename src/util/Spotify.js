@@ -57,14 +57,16 @@ const Spotify = {
         2.use userID to make post requeststs to playlist API to create a playlist
         3.assignt track uri to new playlist
         */
-
+        console.log('start save play list here.')
+        console.log(playlistName);
+        console.log(trackURIs)
         // first check if these arguments have values saved to them. if not, return to terminate immediately
         // i.e. no play list name or no tracks saved to play list. 
-        if(!(playlistName && trackURIs)){
+        if(!playlistName || !trackURIs){
             return;
         }
         //1. Get userId from access_token
-        console.log('start save play list here.')
+        
         //start by getting the current user's ID
         let url = 'https://api.spotify.com/v1/me';
         // initialise some variables
@@ -72,13 +74,13 @@ const Spotify = {
         
         let headers = {Authorization: `Bearer ${accessToken}`}
         let userID;
-       
+        console.log('Try ...  catch block here.')
         try {
             const response = await fetch(url, {headers: headers});
             if(response.ok){
-                const jsonResponse = await response.json();
-                console.log(jsonResponse)
-                let profile = jsonResponse;
+                const profile = await response.json();
+                console.log('Profile is ');
+                console.log(profile);
                 userID=profile.id;
             }else{
                 throw new Error('Request has failed!')
@@ -100,8 +102,9 @@ const Spotify = {
         try{
             const response = await fetch(url, {method:'POST', headers: headers, body: JSON.stringify(data)});
             if(response.ok){
-                const jsonResponse = await response.json();
-                const newPlaylist = jsonResponse.parse();
+                const newPlaylist= await response.json();
+                // response.json() actually returns an object!
+                console.log(newPlaylist);
                 playlistID = newPlaylist.id;
                 console.log(`playlist ID is ${playlistID}`); // debug 
                 
@@ -128,8 +131,8 @@ const Spotify = {
                 Convert the response to JSON and save the response id parameter to a variable called playlistID. 
                 */
                 const jsonResponse = await response.json();
-                const objResponse = jsonResponse.pars();
-                const snapshotID=objResponse['snapshot_id'];
+                console.log('add track response');
+                const snapshotID=jsonResponse['snapshot_id'];
                 console.log(snapshotID);
 
             }else{
