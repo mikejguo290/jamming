@@ -33,9 +33,7 @@ const Spotify = {
 
             // if access token does exist in url parameters, then token isn't null. set accessToken
             accessToken = url.match(/access_token=([^&]*)/)[1]; // url.match() would return null if no match is found
-            const expiresIn = Number(url.match(/expires_in=([^&]*)/)[1]);
-            console.log(accessToken);
-            console.log(expiresIn); // set accessToken and expiresIn properly
+            const expiresIn = Number(url.match(/expires_in=([^&]*)/)[1]);// set accessToken and expiresIn properly
 
             // if neither expiresIn nor accessToken is null, set expiry time for accessToken. clear the parameters from the url.
             // So the app doesn't grab the access token after it has expired, clear the parameters from the url 
@@ -66,20 +64,21 @@ const Spotify = {
             return;
         }
         //1. Get userId from access_token
-        
+        console.log('start save play list here.')
         //start by getting the current user's ID
         let url = 'https://api.spotify.com/v1/me';
         // initialise some variables
         this.getAccessToken(); // this should modify the global accessToken global variable. 
-        const userAccessToken = accessToken; 
-        let headers = {Authorization: `Bearer ${userAccessToken}`}
+        
+        let headers = {Authorization: `Bearer ${accessToken}`}
         let userID;
        
         try {
             const response = await fetch(url, {headers: headers});
             if(response.ok){
                 const jsonResponse = await response.json();
-                const profile = jsonResponse.parse();
+                console.log(jsonResponse)
+                let profile = jsonResponse;
                 userID=profile.id;
             }else{
                 throw new Error('Request has failed!')
@@ -92,7 +91,7 @@ const Spotify = {
         //2. POST request to create playlist API to add a playlist to user account and return the playlist ID
         url = `https://api.spotify.com/v1/users/${userID}/playlists`
         headers={
-            Authorization: `Bearer ${userAccessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json',
         }
         let data={name: playlistName}; // add new playlist to user id 
@@ -116,7 +115,7 @@ const Spotify = {
         // CodeCademy hint is to set url = /v1/users/{user_id}/playlists/{playlist_id}/tracks
         url = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
         headers={
-            Authorization: `Bearer ${userAccessToken}`,
+            Authorization: `Bearer ${accessToken}`,
             'Content-Type': 'application/json'
         }
 
@@ -167,7 +166,6 @@ const Spotify = {
                     };
                     tracks.push(formattedTrack);
                 });
-                console.log(tracks);
                 return tracks;
             }else{
                 throw new Error ('Request failed!');

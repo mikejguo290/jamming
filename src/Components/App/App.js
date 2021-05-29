@@ -62,11 +62,9 @@ export class App extends React.Component {
 
     async search(searchTerm){
         /* accept a search term and then send search parameter to spotify API and updates searchResults with the user's search results. */
-     
-        console.log(searchTerm);
+
         // use imported search function from spotify.
         const searchResults=await Spotify.search(searchTerm);
-        console.log(searchResults);
         this.setState({searchResults: searchResults});
     }
 
