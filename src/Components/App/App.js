@@ -12,26 +12,51 @@ export class App extends React.Component {
         this.state = { 
             searchResults: [ 
                 { 
-                    id: 1,
+                    album:'Infest',
+                    artist: 'Papa Roach',
+                    id: '5W8YXBz9MTIDyrpYaCg2Ky',
+                    name:'Last Resort', 
+                    uri:'spotify:track:5W8YXBz9MTIDyrpYaCg2Ky'
+                },
+                {   
+                    album:'X&Y',
+                    artist: 'Coldplay',
+                    id: '7LVHVU3tWfcxj5aiPFEW4Q',
                     name:'Fix You', 
-                    artist : 'Coldplay', 
-                    album: 'XYZ' 
+                    uri:'spotify:track:7LVHVU3tWfcxj5aiPFEW4Q'
                 },
                 {   
-                    id: 2,
-                    name:'Blinding Lights', 
-                    artist: 'The Weeknd', 
-                    album:'Blinding Lights'
-                },
-                {   
-                    id: 3,
-                    name:'Hang with me',
-                    artist:'Robyn',
-                    album:'Body Talk'
+                    album:'Body Talk',
+                    artist: 'Robyn',
+                    id: '1U5XoeYZ4oOftvEKpAJUmP',
+                    name:'Hang With Me', 
+                    uri:'spotify:track:1U5XoeYZ4oOftvEKpAJUmP'
                 }
             ],
             playlistName: 'New Playlist',
-            playlistTracks: [ ]
+            playlistTracks: [
+                { 
+                    album:'The Family Jewels',
+                    artist: 'MARINA',
+                    id: '0fiPpwBPIaxxydn4KzX9Tc',
+                    name:'I Am Not a Robot', 
+                    uri:'spotify:track:0fiPpwBPIaxxydn4KzX9Tc'
+                }, 
+                {
+                    album:"Future Nostalgia",
+                    artist:"Dua Lipa",
+                    id:"3AzjcOeAmA57TIOr9zF1ZW",
+                    name:"Physical",
+                    uri:"spotify:track:3AzjcOeAmA57TIOr9zF1ZW"
+                },
+                {
+                    album:"Starboy",
+                    artist:"The Weeknd",
+                    id:"7MXVkk9YMctZqd1Srtv4MB",
+                    name:"Starboy",
+                    uri:"spotify:track:7MXVkk9YMctZqd1Srtv4MB"
+                }
+            ]
 
         };
         this.addTrack=this.addTrack.bind(this); // bind eventHandler method to this.
